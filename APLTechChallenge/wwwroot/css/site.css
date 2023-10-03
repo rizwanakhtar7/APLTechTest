@@ -1,0 +1,35 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.validation-summary-errors {
+    color: red;
+    margin-bottom: 10px;
+    font-weight: bold;
+    list-style: none;
+    padding-left: 0; 
+}
+
+.validation-summary-errors li {
+   list-style: none; 
+}
+
+.fixed-image {
+    width: 300px; 
+    height: 200px; 
+}

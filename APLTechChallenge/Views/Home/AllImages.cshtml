@@ -1,0 +1,37 @@
+﻿@model List<ImageAudit>
+
+<style>
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .image-grid-item {
+        flex: 0 0 calc(33.33% - 10px); 
+        margin-bottom: 10px; 
+        border: 1px solid black;
+    }
+
+    .image-grid-item img {
+        width: 100%;
+        height: auto;
+     }
+</style>
+
+<h1>List of all Images Uploaded</h1>
+
+@if (Model.Any())
+{
+    <div class="image-grid">
+        @foreach (var image in Model)
+        {
+            <div class="image-grid-item">
+                <img src="@Url.Content("~/UploadedFiles/" + image.Name)" alt="Uploaded Image" />
+            </div>
+        }
+    </div>
+}
+
+<a asp-action="Upload" asp-controller="Home" value="Upload" class="btn btn-primary">Return back to Homescreen</a>

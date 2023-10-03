@@ -1,0 +1,72 @@
+﻿@model APLTechChallenge.Models.ImageModel
+
+<h2>Upload pictures here</h2>
+<hr />
+
+<div class="validation-summary-errors">
+    @Html.ValidationSummary()
+</div>
+
+<form enctype="multipart/form-data"  method="post">
+    @Html.AntiForgeryToken()
+
+    <dl>
+        <dt>
+            <label asp-for="FileDetails"></label>
+        </dt>
+        <dd>
+            <input asp-for="File" type="file">
+        </dd>
+    </dl>
+    <input type="submit" asp-action="Upload" asp-controller="Home" value="Upload Locally" class="btn btn-primary" />
+    <input type="submit" asp-action="UploadToAzure" asp-controller="Home" value="Upload To Azure" class="btn btn-info" />
+</form>
+
+<br />
+
+<div>
+    @if (!String.IsNullOrEmpty(ViewBag.LatestImage))
+    {
+        <div class="card">
+            <img class="card-img-top fixed-image" src="@Url.Content("~/UploadedFiles/" + @ViewBag.LatestImage)" alt="Latest Image" />
+            <div class="card-body">
+                <h5 class="card-title">Latest Image</h5>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Upload an image to see it here...!</p>
+            </div>
+        </div>
+    }
+</div>
+
+<br />
+
+<a asp-action="AllImages" asp-controller="Home" value="AllImages" class="btn btn-primary">Click to view all Images uploaded </a>
+
+
+
+<div id="successMessage" style="display: none;">Image loaded successfully!</div>
+
+<script>
+
+    var imageElement = document.getElementById('imageId'); 
+
+    imageElement.addEventListener('load', function () {
+        var successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'block'; 
+    });
+
+
+    document.getElementById("uploadToAzureButton").addEventListener("click", function () {
+
+        document.getElementById("azureForm").action = "/Home/UploadToAzure";
+
+        document.getElementById("azureForm").submit();
+    });
+
+</script>
